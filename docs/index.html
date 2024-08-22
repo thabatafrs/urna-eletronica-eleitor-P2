@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urna Eletrônica</title>
+  <link rel="stylesheet" href="styleEleitor.css" />
+  <script src="https://kit.fontawesome.com/877e197de7.js" crossorigin="anonymous"></script>
+  <style>
+    .botao {
+      display: none;
+    }
+
+    p {
+      font-size: large;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="janela">
+      <p>Digite abaixo o número da chapa:</p>
+      <input type="text" name="n_chap" id="n_chap" placeholder="XXXX" autofocus tabindex="1" />
+
+      <button class="botao" onclick="enviarNumeroChapa()">
+        votar
+      </button>
+      
+      <button class="botao_branco" tabindex="2" onclick="votarBranco()">
+        VOTAR BRANCO
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("n_chap").addEventListener("input", function () {
+      if (this.value.length > 2) {
+        this.value = this.value.slice(0, 2);
+      }
+    });
+
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const botao = document.querySelector(".botao");
+        const botao_branco = document.querySelector(".botao_branco");
+        const input = document.querySelector("#n_chap")
+        if (input === document.activeElement) {
+          botao_branco.focus()
+        } else {
+          input.focus();
+        }
+
+      }
+    });
+
+
+    function enviarNumeroChapa(chapa) {
+      const n_chapInput = document.getElementById("n_chap");
+      const numeroChapa = n_chapInput.value;
+      const Stringchapa = numeroChapa.toString();
+      console.log(Stringchapa);
+      const url = `https://mesariobarao.squareweb.app/candidato/${chapa}`;
+      const data = JSON.stringify({
+        chapa: Stringchapa
+      });
+      const urlVoto = `confirmar.html?numero=${encodeURIComponent(
+          numeroChapa
+        )}`;
+
+      fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: data,
+        })
+
+        .then((response) => response.json())
+        .then((eleitor) => {
+          console.log(eleitor);
+          if (eleitor.chapa !== Stringchapa) {
+            /*window.alert("Candidato não encontrado!");*/
+            votarBranco();
+          } else {
+            window.location.href = urlVoto;
+          }
+        });
+    }
+
+    function votarBranco() {
+      const url = "confirmar.html?numero=BRANCO";
+      window.location.href = url;
+    }
+
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        enviarNumeroChapa();
+      }
+    });
+
+    function verificarUrnaLiberada() {
+      fetch(`hhttps://eleitorbarao.squareweb.app/eleitor/verificar/${ra}`, {
+          method: "POST",
+        })
+        .then((response) => response.json())
+
+        .then((data) => {
+          let urnaLiberada = data;
+          console.log(urnaLiberada);
+          setTimeout(verificarUrnaLiberada, 2000);
+
+          if (urnaLiberada === false) {
+            window.location.href = "index.html";
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
+    verificarUrnaLiberada();
+  </script>
+</body>
+
+</html>
