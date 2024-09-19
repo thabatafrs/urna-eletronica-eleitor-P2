@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="styleEleitor.css" />
   <script src="https://kit.fontawesome.com/877e197de7.js" crossorigin="anonymous"></script>
   <style>
-    .botao {
-      display: none;
-    }
 
     p {
       font-size: large;
@@ -25,11 +22,11 @@
       <p>Digite abaixo o número da chapa:</p>
       <input type="text" name="n_chap" id="n_chap" placeholder="XXXX" autofocus tabindex="1" />
 
-      <button class="botao" onclick="enviarNumeroChapa()">
-        votar
-      </button>
+        <button class="botao" onclick="enviarNumeroChapa()" title="Confirmar voto">
+          votar
+        </button>
       
-      <button class="botao_branco" tabindex="2" onclick="votarBranco()">
+      <button class="botao_branco" tabindex="2" onclick="votarBranco()" title="Voto sem candidato">
         VOTAR BRANCO
       </button>
     </div>
