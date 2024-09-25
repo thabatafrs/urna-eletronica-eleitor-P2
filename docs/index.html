@@ -31,7 +31,8 @@
       </button>
     </div>
   </div>
-
+  
+  <script src="constantes.js"></script>
   <script>
     document.getElementById("n_chap").addEventListener("input", function () {
       if (this.value.length > 2) {
@@ -60,7 +61,7 @@
       const numeroChapa = n_chapInput.value;
       const Stringchapa = numeroChapa.toString();
       console.log(Stringchapa);
-      const url = `https://mesariobarao.squareweb.app/candidato/${chapa}`;
+      const url = `${baseUrlMesario}/candidato/${chapa}`;
       const data = JSON.stringify({
         chapa: Stringchapa
       });
@@ -101,7 +102,7 @@
     });
 
     function verificarUrnaLiberada() {
-      fetch(`hhttps://eleitorbarao.squareweb.app/eleitor/verificar/${ra}`, {
+      fetch(`${BaseUrlEleitor}/eleitor/verificar/${ra}`, {
           method: "POST",
         })
         .then((response) => response.json())

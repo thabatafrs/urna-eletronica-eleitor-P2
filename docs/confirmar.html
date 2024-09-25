@@ -57,6 +57,7 @@
     </div>
 
     <script src="mainEleitor.js"></script>
+    <script src="constantes.js"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const chapa = params.get("numero");
@@ -86,7 +87,7 @@
           document.getElementById("foto_chapa").style.display = "none";
         } else {
           const object = { chapa: numeroChapaURL };
-          const url = `https://mesariobarao.squareweb.app/candidato/${numeroChapaURL}`;
+          const url = `${BaseUrlMesario}/candidato/${numeroChapaURL}`;
           const nchapa = JSON.stringify(object);
 
           fetch(url, {
@@ -135,7 +136,7 @@
         const object = { chapa: chapaEnviada };
         console.log(object);
 
-        const url = "https://mesariobarao.squareweb.app/voto";
+        const url = `${BaseUrlMesario}/voto`;
         const data = JSON.stringify(object);
 
         fetch(url, {
