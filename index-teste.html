@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/877e197de7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="constantes.js"></script>
+    <style>
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+  
+  button {
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid #000;
+    margin: 10px auto;
+    width: 200px;
+  }
+  
+  .confirmar {
+    background-color: green;
+  }
+  
+  .cancelar {
+    background-color: red;
+  }
+  
+  .branco {
+    background-color: #fff;
+  }
+  
+  .options {
+    background-color: #a8a1a1;
+    padding: 12px;
+    width: 250px;
+    margin: 60px 0;
+    border-radius: 10px;
+  }
+  
+  input, input:disabled {
+    text-align: center;
+    color: #444;
+    cursor: not-allowed;
+    outline: 3px solid #444 ;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 6px;
+    height: 2rem;
+    width: 200px;
+    margin: auto;
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  label {
+    font-weight: 600;
+    font-size: large;
+  }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="info">
+          <label for="inputVoto">Digite a chapa que deseja votar</label>
+          <input
+            id="inputVoto"
+            name="inputVoto"
+            type="number"
+            onclick="preventInputFocus(this)"
+            disabled
+
+          />
+        </div>
+  
+        <div class="buttons">
+          <button onclick="enviarNumeroChapa()" class="confirmar">
+            Confirmar voto
+          </button>
+  
+          <button onclick="cancelarVoto()" class="cancelar">Cancelar voto</button>
+  
+          <button onclick="votarBranco()" class="branco">Votar branco</button>
+        </div>
+  
+        <div class="options">
+          <p>Digite <span style="color: green">Enter</span> para confirmar</p>
+          <p>
+            Digite <span style="color: rgb(128, 0, 0)">Delete</span> para cancelar
+          </p>
+          <p>Digite <span style="color: white">"+"</span> para votar em branco</p>
+        </div>
+    <script>
+      const NUMERICOS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+      const inputVoto = document.getElementById("inputVoto");
+
+      // Funções
+      function inserirNumero(numero) {
+        inputVoto.value = inputVoto.value + numero;
+      }
+
+      function votarBranco() {
+        alert("Você votou branco!");
+      }
+
+      function confirmarVoto() {
+        alert("Você confirmou seu voto!");
+      }
+
+      function cancelarVoto() {
+        alert("Você cancelou o voto!");
+      }
+
+      function limpaTudo() {
+        inputVoto.value = "";
+      }
+
+      // Event Listener
+      document.addEventListener("keydown", (event) => {
+        // Cria um Event Listener para capturar todas as teclas pressionadas
+
+        const tecla = event.key; // Captura a tecla clicada
+        // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
+        // alert('Tecla clicada\n\n' + 'key: ' + tecla);
+
+        event.preventDefault(); // Importante para previnir que a tecla clicada tenha seu comportamento padrão. Isto é, ao clicar tab, o navegador não irá 'focar' o próximo elemento.
+
+        if (NUMERICOS.includes(tecla)) {
+          inserirNumero(tecla);
+        }
+
+        if (tecla == "+") {
+          votarBranco(); // Chama a função a ser executada se o tab for clicado
+          limpaTudo();
+          return;
+        }
+
+        if (tecla == "Enter") {
+          confirmarVoto();
+          limpaTudo();
+          return;
+        }
+
+        if (tecla == "Delete") {
+          cancelarVoto();
+          limpaTudo();
+          return;
+        }
+
+        if (tecla == "Backspace") {
+          limpaTudo();
+          return;
+        }
+      });
+    </script>
+  </body>
+</html>

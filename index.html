@@ -1,0 +1,216 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urna Eletrônica</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/877e197de7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="constantes.js"></script>
+    <style>
+      .botao {
+        display: none;
+      }
+
+      p {
+        font-size: large;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="info">
+        <label for="inputVoto">Digite a chapa que deseja votar</label>
+        <input
+          id="inputVoto"
+          name="inputVoto"
+          type="text"
+          onclick="preventInputFocus(this)"
+          disabled
+        />
+      </div>
+
+      <div class="buttons">
+        <button onclick="enviarNumeroChapa()" class="confirmar">
+          Confirmar voto
+        </button>
+
+        <button onclick="cancelarVoto()" class="cancelar">Cancelar voto</button>
+
+        <button onclick="votarBranco()" class="branco">Votar branco</button>
+      </div>
+
+      <div class="options">
+        <p>Digite <span style="color: green">Enter</span> para confirmar</p>
+        <p>
+          Digite <span style="color: rgb(128, 0, 0)">Delete</span> para cancelar
+        </p>
+        <p>Digite <span style="color: white">"+"</span> para votar em branco</p>
+      </div>
+
+      <!-- <div class="janela">
+      <p>Digite abaixo o número da chapa:</p>
+      <input type="text" name="n_chap" id="n_chap" placeholder="XXXX" autofocus tabindex="1" />
+
+      <button class="botao" onclick="enviarNumeroChapa()">
+        votar
+      </button>
+      
+      <button class="botao_branco" tabindex="2" onclick="votarBranco()">
+        VOTAR BRANCO
+      </button>
+    </div> -->
+    </div>
+
+    <script>
+      // document.getElementById("n_chap").addEventListener("input", function () {
+      //   if (this.value.length > 2) {
+      //     this.value = this.value.slice(0, 2);
+      //   }
+      // });
+
+      // window.addEventListener("keydown", function (e) {
+      //   if (e.key === "Tab") {
+      //     e.preventDefault();
+      //     const botao = document.querySelector(".botao");
+      //     const botao_branco = document.querySelector(".botao_branco");
+      //     const input = document.querySelector("#n_chap");
+      //     if (input === document.activeElement) {
+      //       botao_branco.focus();
+      //     } else {
+      //       input.focus();
+      //     }
+      //   }
+      // });
+
+      // window.addEventListener("keydown", function (e) {
+      //   if (e.key === "Enter") {
+      //     e.preventDefault();
+      //     enviarNumeroChapa();
+      //   }
+      // });
+
+//       function verificarUrnaLiberada() {
+//         fetch(`${BaseUrlEleitor}/eleitor/verificar/${ra}`, {
+//           method: "POST",
+//         })
+//           .then((response) => response.json())
+
+//           .then((data) => {
+//             let urnaLiberada = data;
+//             console.log(urnaLiberada);
+//             setTimeout(verificarUrnaLiberada, 2000);
+
+//             if (urnaLiberada === false) {
+//               window.location.href = "index.html";
+//             }
+//           })
+//           .catch((err) => {
+//             console.error(err);
+//           });
+//       }
+
+//       verificarUrnaLiberada();
+
+//       const NUMERICOS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+//       const inputVoto = document.getElementById("inputVoto");
+
+//       // Funções
+
+//       function inserirNumero(numero) {
+//         inputVoto.value = inputVoto.value + numero;
+//       }
+
+//       function votarBranco() {
+//         const url = "confirmar.html?numero=BRANCO";
+//         window.location.href = url;
+//       }
+
+//       function confirmarVoto() {
+//         function enviarNumeroChapa(chapa) {
+//           const n_chapInput = document.getElementById("n_chap");
+//           const numeroChapa = n_chapInput.value;
+//           const Stringchapa = numeroChapa.toString();
+//           console.log(Stringchapa);
+//           const url = `${baseUrlMesario}/candidato/${chapa}`;
+//           const data = JSON.stringify({
+//             chapa: Stringchapa,
+//           });
+//           const urlVoto = `confirmar.html?numero=${encodeURIComponent(
+//             numeroChapa
+//           )}`;
+
+//           fetch(url, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             body: data,
+//           })
+//             .then((response) => response.json())
+//             .then((eleitor) => {
+//               console.log(eleitor);
+//               if (eleitor.chapa !== Stringchapa) {
+//                 /*window.alert("Candidato não encontrado!");*/
+//                 votarBranco();
+//               } else {
+//                 window.location.href = urlVoto;
+//               }
+//             });
+//         }
+//       }
+
+//       function cancelarVoto() {
+//         inputVoto.value = "";
+//       }
+
+//       function limpaTudo() {
+//         inputVoto.value = "";
+//       }
+
+//       // Event Listener
+//       document.addEventListener("keydown", (event) => {
+//         // Cria um Event Listener para capturar todas as teclas pressionadas
+
+//         const tecla = event.key; // Captura a tecla clicada
+//         // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
+//         // alert('Tecla clicada\n\n' + 'key: ' + tecla);
+
+//         event.preventDefault(); // Importante para previnir que a tecla clicada tenha seu comportamento padrão. Isto é, ao clicar tab, o navegador não irá 'focar' o próximo elemento.
+
+//         if (NUMERICOS.includes(tecla)) {
+//           inserirNumero(tecla);
+//         }
+
+//         if (tecla == "End") {
+//           votarBranco(); // Chama a função a ser executada se o tab for clicado
+//           limpaTudo();
+//           return;
+//         }
+
+//         if (tecla == "PageUp") {
+//           confirmarVoto();
+//           limpaTudo();
+//           return;
+//         }
+
+//         if (tecla == "PageDown") {
+//           cancelarVoto();
+//           limpaTudo();
+//           return;
+//         }
+
+//         if (tecla == "Delete") {
+//           limpaTudo();
+//           return;
+//         }
+//       });
+    </script>
+  </body>
+</html> -->
