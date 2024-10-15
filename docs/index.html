@@ -56,10 +56,11 @@
   
   .options {
     background-color: #a8a1a1;
-    padding: 12px;
+    padding: 20px;
     width: 250px;
     margin: 60px 0;
     border-radius: 10px;
+    font-size: large;
   }
   
   input, input:disabled {
@@ -88,7 +89,7 @@
   <body>
     <div class="container">
       
-        <div class="info">
+        <div class="info" >
           
           <label for="inputVoto">Digite a chapa que deseja votar</label>
           
@@ -104,7 +105,7 @@
           <p id="notFound" style="display: none; font-weight: bold;"><span style="color: rgb(128, 0, 0)">Candidato não encontrado.</span></p>
         </div>
   
-        <div id="buttons" class="buttons">
+        <div id="buttons" class="buttons" style="display: none;">
           <button onclick="enviarNumeroChapa()" class="confirmar">
             Confirmar voto
           </button>
