@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="5; index.html" />
+  <title>Fim</title>
+  <link rel="stylesheet" href="styleEleitor.css" />
+  <style>
+    body {
+      overflow: hidden
+    }
+.cont {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+h4 {
+  font-style: italic;
+  font-size: small;
+  padding-top: 20px;
+  color: rgb(71, 71, 71);
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="cont">
+    <div class="cont1">
+      <h1>FIM</h1>
+      
+      <audio id="my_audio" src="confirma-urna.mp3"></audio>
+    </div>
+    <div class="cont2"><h4>♪ efeito sonoro agudo, como um "pliiim", para indicar a confirmação da ação. ♪ </h4></div>
+  </div>
+
+
+  <script>
+    window.onload = function () {
+      document.getElementById("my_audio").play();
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+
+  <script src="mainMesario.js"></script>
+</body>
+
+</html>
