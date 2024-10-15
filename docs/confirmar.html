@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Confirmação de Voto</title>
-    <link rel="stylesheet" href="styleEleitor.css" />
+    <!-- <link rel="stylesheet" href="styleEleitor.css" /> -->
     <script
       src="https://kit.fontawesome.com/877e197de7.js"
       crossorigin="anonymous"
@@ -21,64 +21,88 @@
       #mensagem {
         text-align: center;
         font-weight: bold;
-        font-size: medium;
+        font-size: large;
+
       }
 
       .buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-  }
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+      }
 
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    gap: 15px;
-  }
-  
-  button {
-    font-size: 1.2rem;
-    font-weight: 600;
-    border: 2px solid #000;
-    margin: 10px auto;
-    width: 200px;
-  }
-  
-  .confirmar {
-    background-color: green;
-  }
-  
-  .cancelar {
-    background-color: red;
-  }
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      button {
+        font-size: 1.2rem;
+        font-weight: 600;
+        border: 2px solid #000;
+        margin: 10px auto;
+        width: 200px;
+      }
+
+      .confirmar {
+        background-color: green;
+      }
+
+      .cancelar {
+        background-color: red;
+      }
+
+      .options {
+        background-color: #a8a1a1;
+        padding: 20px;
+        width: 250px;
+        margin: 60px 0;
+        border-radius: 10px;
+        font-size: large;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
+      <div class="foto do candidato">
+        <img id="foto_chapa" src="" alt="Foto da Chapa" />
+      </div>
 
-        <div class="foto do candidato">
-          <img id="foto_chapa" src="" alt="Foto da Chapa" />
-        </div>
+      <p id="numero_chapa"></p>
+      <div id="mensagem"></div>
+      <div id="options" class="options">
+        <p><span style="color: green">Verde</span> para confirmar</p>
+        <p>
+          <span style="color: rgb(170, 46, 46)">Vermelho</span> para cancelar e voltar
+        </p>
+      </div>
+      <div id="buttons" style="display: none" class="buttons">
+        <button
+          onclick="confirmaVoto()"
+          autofocus
+          id="confirma"
+          class="confirmar"
+          tabindex="1"
+        >
+          Confirmar voto
+        </button>
 
-        <p id="numero_chapa"></p>
-        <div id="mensagem"></div>
+        <button
+          onclick="cancelarVoto()"
+          id="cancela"
+          class="cancelar"
+          tabindex="2"
+        >
+          Cancelar voto
+        </button>
+      </div>
 
-        <div id="buttons" class="buttons">
-          <button onclick="confirmaVoto()"
-          autofocus id="confirma" class="confirmar" tabindex="1" >
-            Confirmar voto
-          </button>
-  
-          <button onclick="cancelarVoto()" id="cancela" class="cancelar" tabindex="2">Cancelar voto</button>
-
-        </div>
-
-        <!-- <div class="botoes_container">
+      <!-- <div class="botoes_container">
           <button
             class="botao_confirma"
             id="confirma"
@@ -97,8 +121,6 @@
             cancelar
           </button>
         </div> -->
-
-
     </div>
 
     <script src="mainEleitor.js"></script>
@@ -192,7 +214,6 @@
         })
           .then((response) => {
             if (!response.ok) {
-  
             }
             window.location.href = "FIM.html";
           })
@@ -202,19 +223,38 @@
             document.getElementById("foto_chapa").style.display = "none";
             document.getElementById("numero_chapa").style.display = "none";
             document.getElementById("confirma").style.display = "none";
-            document.getElementById("cancela").innerHTML =
-              "Voltar";
-            document.getElementById("cancela").style.width = "100%";
+            document.getElementById("options").style.display = "none";
+          
             document.getElementById("cancela").focus();
-            setTimeout(function() {
+            setTimeout(function () {
               location.href = "index.html";
-            }, 2000);
+            }, 3000);
           });
       }
 
       function cancelarVoto() {
         location.href = "index.html";
       }
+
+      document.addEventListener("keydown", (event) => {
+        // Cria um Event Listener para capturar todas as teclas pressionadas
+
+        const tecla = event.key; // Captura a tecla clicada
+        // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
+        // alert('Tecla clicada\n\n' + 'key: ' + tecla);
+
+        event.preventDefault(); // Importante para previnir que a tecla clicada tenha seu comportamento padrão. Isto é, ao clicar tab, o navegador não irá 'focar' o próximo elemento.
+
+        if (tecla == "Enter") {
+          confirmaVoto();
+          return;
+        }
+
+        if (tecla == "Backspace") {
+          cancelarVoto();
+          return;
+        }
+      });
     </script>
   </body>
 </html>
