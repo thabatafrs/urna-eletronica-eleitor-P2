@@ -123,8 +123,28 @@
 
     <script>
       const NUMERICOS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
+      
       const inputVoto = document.getElementById("inputVoto");
+
+      function enterFullscreen() {
+        const element = document.documentElement; // Obtém o elemento raiz (html)
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          // Firefox
+          element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+          // Chrome, Safari e Opera
+          element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+          // IE/Edge
+          element.msRequestFullscreen();
+        }
+      }
+
+      window.onload = () => {
+        enterFullscreen();
+      };
 
       // Funções
       function inserirNumero(numero) {
@@ -210,43 +230,26 @@
       }
 
       // Event Listener
-      document.addEventListener("keydown", (event) => {
-        // Cria um Event Listener para capturar todas as teclas pressionadas
+      window.addEventListener("keydown", function (e) {
+        const input = document.getElementById("n_chap");
 
-        const tecla = event.key; // Captura a tecla clicada
-        // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
-        // alert('Tecla clicada\n\n' + 'key: ' + tecla);
-
-        event.preventDefault(); // Importante para previnir que a tecla clicada tenha seu comportamento padrão. Isto é, ao clicar tab, o navegador não irá 'focar' o próximo elemento.
-
-        if (NUMERICOS.includes(tecla)) {
-          inserirNumero(tecla);
+        // 'Enter' para confirmar o voto
+        if (e.key === "Enter") {
+          e.preventDefault();
+          enviarNumeroChapa();
+        }
+        // '.' para limpar o campo
+        if (e.key === ".") {
+          e.preventDefault();
+          input.value = "";
         }
 
-        if (tecla == "+") {
+        // '000' para voto branco
+        if (input.value === "000") {
           votarBranco();
-          limpaTudo();
-          return;
-        }
-
-        if (tecla == "Enter") {
-          confirmarVoto();
-          limpaTudo();
-          return;
-        }
-
-        if (tecla == "Delete") {
-
-          limpaTudo();
-          return;
-        }
-
-        if (tecla == "Backspace") {
-          limpaTudo();
-          return;
         }
       });
-
+      
       function verificarUrnaLiberada() {
         fetch(`${BaseUrlEleitor}/eleitor/verificar/${ra}`, {
           method: "POST",

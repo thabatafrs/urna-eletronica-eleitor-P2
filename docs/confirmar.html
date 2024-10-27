@@ -130,6 +130,26 @@
       const numeroChapaURL = params.get("numero");
       const numeroChapaDIV = document.getElementById("numero_chapa");
 
+      function enterFullscreen() {
+        const element = document.documentElement; // Obtém o elemento raiz (html)
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          // Firefox
+          element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+          // Chrome, Safari e Opera
+          element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+          // IE/Edge
+          element.msRequestFullscreen();
+        }
+      }
+
+      window.onload = () => {
+        enterFullscreen();
+      };
+
       window.addEventListener("keydown", function (e) {
         if (e.key === "Tab") {
           e.preventDefault();
