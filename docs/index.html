@@ -230,7 +230,8 @@
 
       window.addEventListener("keydown", function (e) {
         const tecla = e.key;
-
+        // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
+        console.log('Tecla clicada\n\n' + 'key: ' + tecla);
         if (tecla >= "0" && tecla <= "9") {
           inserirNumero(tecla);
         } else if (tecla === "Enter") {
