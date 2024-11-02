@@ -153,7 +153,9 @@ body{
 
       // Funções
       function inserirNumero(numero) {
-        inputVoto.value = inputVoto.value + numero;
+        if (inputVoto.value.length < 2) { // Limita a quantidade de caracteres a 2
+          inputVoto.value += numero;
+        }
       }
 
       function votarBranco() {
