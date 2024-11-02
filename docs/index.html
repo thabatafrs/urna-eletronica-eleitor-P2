@@ -10,6 +10,13 @@
     ></script>
     <script src="constantes.js"></script>
     <style>
+body{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-y: hidden;
+      }
 .container {
     display: flex;
     align-items: center;
@@ -35,24 +42,13 @@
   }
   
   button {
-    font-size: 1.2rem;
-    font-weight: 600;
-    border: 2px solid #000;
-    margin: 10px auto;
-    width: 200px;
-  }
-  
-  .confirmar {
-    background-color: green;
-  }
-  
-  .cancelar {
-    background-color: red;
-  }
-  
-  .branco {
-    background-color: #fff;
-  }
+        font-size: 14px;
+        font-weight: bold;
+        border: 2px solid #000;
+        border-radius: 10px;
+        margin: 5px auto;
+        width: 80px;
+      }
   
   .options {
     background-color: #a8a1a1;
@@ -65,9 +61,10 @@
   
   input, input:disabled {
     text-align: center;
-    color: #444;
+    /* color: #444; */
     cursor: not-allowed;
-    outline: 3px solid #444 ;
+    outline: 2px solid #444 ;
+    border-radius: 8px;
     font-size: 2rem;
     font-weight: 600;
     padding: 6px;
@@ -76,14 +73,28 @@
     margin: auto;
   }
   
-  p {
-    text-align: center;
-  }
-  
   label {
-    font-weight: 600;
+    font-weight: bold;
     font-size: large;
   }
+
+  .barra {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        background-color: #000;
+        width:400px;
+        height: 1px;
+      }
+
+      .aligns {
+        display: flex;
+        align-items: center;
+      }
+
+      .alts {
+        margin-left: 20px;
+        width: 200px;
+      }
     </style>
   </head>
   <body>
@@ -111,14 +122,28 @@
           </button>
           <button onclick="votarBranco()" class="branco">Votar branco</button>
           <button onclick="cancelarVoto()" class="cancelar">Cancelar voto</button>
-
-          
         </div>
+
+        <span class="barra"></span>
+
+        <div>
+          <div class="aligns">
+            <button style="height: 50px; background-color: white; line-height: 10px;">
+            </button>
+            <p class="alts">PARA VOTAR EM BRANCO</p>
+          </div>
+          
+          <div class="aligns">
+            <button style="height: 50px; background-color: red; line-height: 10px;">
+            </button>
+            <p class="alts">PARA CANCELAR</p>
+          </div>
   
-        <div id="options" class="options">
-          <p><span style="color: green">Verde</span> para confirmar</p>
-          <p><span style="color: white">Branco</span> para votar em branco</p>
-          <p><span style="color: rgb(170, 46, 46)">Vermelho</span> para limpar a tela</p>
+          <div class="aligns">
+            <button style="height: 150px; background-color: green; line-height: 10px;">
+            </button>
+            <p class="alts">PARA CONFIRMAR</p>
+          </div>
         </div>
 
     <script>
@@ -223,25 +248,19 @@
           inserirNumero(tecla);
         }
 
-        if (tecla == "+") {
+        if (tecla == "-") {
           votarBranco();
           limpaTudo();
           return;
         }
-
+        
+        if (tecla == "+") {
+          limpaTudo();
+          return;
+        }
+        
         if (tecla == "Enter") {
           confirmarVoto();
-          limpaTudo();
-          return;
-        }
-
-        if (tecla == "Delete") {
-
-          limpaTudo();
-          return;
-        }
-
-        if (tecla == "Backspace") {
           limpaTudo();
           return;
         }
