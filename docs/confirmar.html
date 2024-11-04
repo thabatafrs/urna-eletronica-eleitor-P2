@@ -1,273 +1,266 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Confirmação de Voto</title>
-    <!-- <link rel="stylesheet" href="styleEleitor.css" /> -->
-    <script
-      src="https://kit.fontawesome.com/877e197de7.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="constantes.js"></script>
-    <style>
-      body{
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow-y: hidden;
-      }
 
-      img {
-        width: 90px;
-        height: 90px;
-        margin: auto;
-        display: block;
-        border-radius: 50%;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmação de Voto</title>
+  <!-- <link rel="stylesheet" href="styleEleitor.css" /> -->
+  <script src="https://kit.fontawesome.com/877e197de7.js" crossorigin="anonymous"></script>
+  <script src="constantes.js"></script>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: hidden;
+    }
+
+    img {
+      width: 90px;
+      height: 90px;
+      margin: auto;
+      display: block;
+      border-radius: 50%;
+    }
 
 
-      .card {
-        width: 170px;
-        height: 185px;
+    .card {
+      width: 170px;
+      height: 185px;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-        justify-content: center;
-        padding: 15px;
-        padding-top: 30px;
-        background-color: #a8a1a1;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
+      justify-content: center;
+      padding: 15px;
+      padding-top: 30px;
+      background-color: #a8a1a1;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-      .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
 
-      button {
-        font-size: 14px;
-        font-weight: bold;
-        border: 2px solid #000;
-        border-radius: 10px;
-        margin: 5px auto;
-        width: 80px;
-      }
+    button {
+      font-size: 14px;
+      font-weight: bold;
+      border: 2px solid #000;
+      border-radius: 10px;
+      margin: 5px auto;
+      width: 80px;
+    }
 
-      .options {
-        background-color: #a8a1a1;
-        padding: 20px;
-        width: 250px;
-        margin: 60px 0;
-        border-radius: 10px;
-        font-size: large;
-      }
+    .options {
+      background-color: #a8a1a1;
+      padding: 20px;
+      width: 250px;
+      margin: 60px 0;
+      border-radius: 10px;
+      font-size: large;
+    }
 
-      .barra {
-        margin-top: 30px;
-        margin-bottom: 30px;
-        background-color: #000;
-        width:400px;
-        height: 1px;
-      }
+    .barra {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      background-color: #000;
+      width: 400px;
+      height: 1px;
+    }
 
-      .aligns {
-        display: flex;
-        align-items: center;
-      }
+    .aligns {
+      display: flex;
+      align-items: center;
+    }
 
-      .alts {
-        margin-left: 20px;
-        width: 200px;
-      }
-    </style>
-  </head>
+    .alts {
+      margin-left: 20px;
+      width: 200px;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="foto do candidato">
-          <img id="foto_chapa" src="" alt="Foto da Chapa" />
-        </div>
-        <p id="numero_chapa"></p>
+<body>
+  <p id="mensagem" style="display: none; color: red; font-weight: bold;"></p>
+
+  <div class="container" id="container">
+    <div class="card">
+      <div class="foto do candidato">
+        <img id="foto_chapa" src="" alt="Foto da Chapa" />
+      </div>
+      <p id="numero_chapa"></p>
+    </div>
+
+    <span class="barra"></span>
+
+
+
+    <div>
+      <div class="aligns">
+        <button style="height: 50px; background-color: red; line-height: 10px;">
+        </button>
+        <p class="alts">PARA CANCELAR</p>
       </div>
 
-      <span class="barra"></span>
-
-      <div>
-        <div class="aligns">
-          <button style="height: 50px; background-color: red; line-height: 10px;">
-          </button>
-          <p class="alts">PARA CANCELAR</p>
-        </div>
-
-        <div class="aligns">
-          <button style="height: 150px; background-color: green; line-height: 10px;">
-          </button>
-          <p class="alts">PARA CONFIRMAR</p>
-        </div>
-      </div>
-
-      <div id="buttons" style="display: none" class="buttons">
-        <button
-          onclick="confirmaVoto()"
-          autofocus
-          id="confirma"
-          class="confirmar"
-          tabindex="1"
-        >
-          Confirmar voto
+      <div class="aligns">
+        <button style="height: 150px; background-color: green; line-height: 10px;">
         </button>
-
-        <button
-          onclick="cancelarVoto()"
-          id="cancela"
-          class="cancelar"
-          tabindex="2"
-        >
-          Cancelar voto
-        </button>
+        <p class="alts">PARA CONFIRMAR</p>
       </div>
     </div>
 
-    <script src="mainEleitor.js"></script>
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const chapa = params.get("numero");
-      const numeroChapaURL = params.get("numero");
-      const numeroChapaDIV = document.getElementById("numero_chapa");
+    <div id="buttons" style="display: none" class="buttons">
+      <button onclick="confirmaVoto()" autofocus id="confirma" class="confirmar" tabindex="1">
+        Confirmar voto
+      </button>
 
-      window.addEventListener("keydown", function (e) {
-        if (e.key === "Tab") {
-          e.preventDefault();
-          const botao_confirma = document.querySelector(".botao_confirma");
-          const botao_cancela = document.querySelector(".botao_cancela");
-          if (botao_cancela === document.activeElement) {
-            botao_confirma.focus();
-          } else {
-            botao_cancela.focus();
-          }
-        }
-      });
+      <button onclick="cancelarVoto()" id="cancela" class="cancelar" tabindex="2">
+        Cancelar voto
+      </button>
+    </div>
+  </div>
 
-      async function getChapaData() {
-        if (
-          numeroChapaURL === "BRANCO" ||
-          numeroChapaURL === null ||
-          isNaN(parseInt(numeroChapaURL))
-        ) {
-          numeroChapaDIV.textContent = "BRANCO";
-          document.getElementById("foto_chapa").style.display = "none";
+  <script src="mainEleitor.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const chapa = params.get("numero");
+    const numeroChapaURL = params.get("numero");
+    const numeroChapaDIV = document.getElementById("numero_chapa");
+
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const botao_confirma = document.querySelector(".botao_confirma");
+        const botao_cancela = document.querySelector(".botao_cancela");
+        if (botao_cancela === document.activeElement) {
+          botao_confirma.focus();
         } else {
-          const object = { chapa: numeroChapaURL };
-          const url = `${BaseUrlMesario}/candidato/${numeroChapaURL}`;
-          const nchapa = JSON.stringify(object);
+          botao_cancela.focus();
+        }
+      }
+    });
 
-          fetch(url, {
+    async function getChapaData() {
+      if (
+        numeroChapaURL === "BRANCO" ||
+        numeroChapaURL === null ||
+        isNaN(parseInt(numeroChapaURL))
+      ) {
+        numeroChapaDIV.textContent = "BRANCO";
+        document.getElementById("foto_chapa").style.display = "none";
+      } else {
+        const object = {
+          chapa: numeroChapaURL
+        };
+        const url = `${BaseUrlMesario}/candidato/${numeroChapaURL}`;
+        const nchapa = JSON.stringify(object);
+
+        fetch(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: nchapa,
           })
-            .then((response) => response.json())
-            .then((candidato) => {
-              console.log(candidato);
-              const imagem = candidato.foto;
-              const imgDiv = document.getElementById("foto_chapa");
+          .then((response) => response.json())
+          .then((candidato) => {
+            console.log(candidato);
+            const imagem = candidato.foto;
+            const imgDiv = document.getElementById("foto_chapa");
 
-              const nome = candidato.nome;
-              const texto = `<h3>Voto para: ${nome}</h3>`;
-              document.querySelector("#numero_chapa").innerHTML += texto;
+            const nome = candidato.nome;
+            const texto = `<h3>Voto para: ${nome}</h3>`;
+            document.querySelector("#numero_chapa").innerHTML += texto;
 
-              imgDiv.setAttribute("src", "data:image/jpg;base64," + imagem);
-            })
-            .catch((error) => {
-              console.error("Erro ao obter dados da chapa:", error);
-            });
-        }
+            imgDiv.setAttribute("src", "data:image/jpg;base64," + imagem);
+          })
+          .catch((error) => {
+            console.error("Erro ao obter dados da chapa:", error);
+          });
+      }
+    }
+
+    getChapaData();
+
+    function exibirMensagem(mensagem) {
+      document.getElementById("mensagem").innerHTML = mensagem;
+    }
+
+    async function confirmaVoto() {
+      let chapaEnviada;
+      if (
+        numeroChapaURL === "BRANCO" ||
+        numeroChapaURL === null ||
+        isNaN(parseInt(numeroChapaURL))
+      ) {
+        chapaEnviada = 0;
+      } else {
+        chapaEnviada = parseInt(numeroChapaURL);
       }
 
-      getChapaData();
+      const object = {
+        chapa: chapaEnviada
+      };
+      console.log(object);
 
-      function exibirMensagem(mensagem) {
-        document.getElementById("mensagem").innerHTML = mensagem;
-      }
+      const url = `${BaseUrlMesario}/voto`;
+      const data = JSON.stringify(object);
 
-      async function confirmaVoto() {
-        let chapaEnviada;
-        if (
-          numeroChapaURL === "BRANCO" ||
-          numeroChapaURL === null ||
-          isNaN(parseInt(numeroChapaURL))
-        ) {
-          chapaEnviada = 0;
-        } else {
-          chapaEnviada = parseInt(numeroChapaURL);
-        }
-
-        const object = { chapa: chapaEnviada };
-        console.log(object);
-
-        const url = `${BaseUrlMesario}/voto`;
-        const data = JSON.stringify(object);
-
-        fetch(url, {
+      fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: data,
         })
-          .then((response) => {
-            if (!response.ok) {
-            }
-            window.location.href = "FIM.html";
-          })
-          .catch((error) => {
-            console.error("Erro ao enviar requisição POST:", error);
-            exibirMensagem("Urna está bloqueada. Sem autorização para voto!");
-            document.getElementById("foto_chapa").style.display = "none";
-            document.getElementById("numero_chapa").style.display = "none";
-            document.getElementById("confirma").style.display = "none";
-            document.getElementById("options").style.display = "none";
-          
-            document.getElementById("cancela").focus();
-            setTimeout(function () {
-              location.href = "index.html";
-            }, 3000);
-          });
+        .then((response) => {
+          if (!response.ok) {}
+          window.location.href = "FIM.html";
+        })
+        .catch((error) => {
+          console.error("Erro ao enviar requisição POST:", error);
+          exibirMensagem("Urna está bloqueada. Sem autorização para voto!");
+          document.getElementById("container").style.display = "none";
+          document.getElementById("mensagem").style.display = "flex";
+
+          setTimeout(function () {
+            location.href = "index.html";
+          }, 3000);
+        });
+    }
+
+    function cancelarVoto() {
+      location.href = "index.html";
+    }
+
+    document.addEventListener("keydown", (event) => {
+      // Cria um Event Listener para capturar todas as teclas pressionadas
+
+      const tecla = event.key; // Captura a tecla clicada
+      // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
+      // alert('Tecla clicada\n\n' + 'key: ' + tecla);
+
+      event
+        .preventDefault(); // Importante para previnir que a tecla clicada tenha seu comportamento padrão. Isto é, ao clicar tab, o navegador não irá 'focar' o próximo elemento.
+
+      if (tecla == "Enter") {
+        confirmaVoto();
+        return;
       }
 
-      function cancelarVoto() {
-        location.href = "index.html";
+      if (tecla == "+") {
+        cancelarVoto();
+        return;
       }
+    });
+  </script>
+</body>
 
-      document.addEventListener("keydown", (event) => {
-        // Cria um Event Listener para capturar todas as teclas pressionadas
-
-        const tecla = event.key; // Captura a tecla clicada
-        // Use o alert comentado abaixo para descobrir o nome das teclas quando clicadas.
-        // alert('Tecla clicada\n\n' + 'key: ' + tecla);
-
-        event.preventDefault(); // Importante para previnir que a tecla clicada tenha seu comportamento padrão. Isto é, ao clicar tab, o navegador não irá 'focar' o próximo elemento.
-
-        if (tecla == "Enter") {
-          confirmaVoto();
-          return;
-        }
-
-        if (tecla == "+") {
-          cancelarVoto();
-          return;
-        }
-      });
-    </script>
-  </body>
 </html>
